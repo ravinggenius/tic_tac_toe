@@ -14,6 +14,22 @@ export default class Game {
 	}
 
 	drawBoard() {
-		React.render(React.createElement(Board, null), document.getElementsByClassName('board-wrap')[0]);
+		React.render(React.createElement(Board, {
+			marks: this.marks()
+		}), document.getElementsByClassName('board-wrap')[0]);
+	}
+
+	marks() {
+		return [
+			'move0',
+			'move1',
+			'move2',
+			'move3',
+			'move4',
+			'move5',
+			'move6',
+			'move7',
+			'move8'
+		];
 	}
 }
