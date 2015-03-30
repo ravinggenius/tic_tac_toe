@@ -48,7 +48,9 @@ export default class Game {
 		} else {
 			this.pick(currentPlayer, currentPlayer.move(this.spaces));
 			this.render();
-			this.waitForPlayer(otherPlayer, currentPlayer);
+			setTimeout(function () {
+				this.waitForPlayer(otherPlayer, currentPlayer);
+			}.bind(this), 0);
 		}
 	}
 }
