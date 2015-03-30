@@ -1,35 +1,54 @@
 import React from 'react';
 
+import SpaceSet from './space_set';
 import Board from './components/board.jsx!';
 
 export default class Game {
 	constructor(player1, player2) {
 		this.player1 = player1;
 		this.player2 = player2;
+
+		this.spaces = new SpaceSet();
 	}
 
 	start() {
-		this.drawBoard();
-		// ready player 1
+		this.render();
+		this.waitForPlayer(this.player1, this.player2);
 	}
 
-	drawBoard() {
+	isOver() {
+		return this.spaces.winner() ||
+			!this.spaces.remaining().count();
+	}
+
+	legalMove(selection) {
+		return (parseInt(selection, 10) === selection) &&
+			!this.spaces.at(selection).value;
+	}
+
+	pick(player, selection) {
+		console.log('pick', player, selection);
+
+		if (this.legalMove(selection)) {
+			this.spaces.at(selection).value = player.mark;
+		} else {
+			throw new Error('Illegal move');
+		}
+	}
+
+	render() {
 		React.render(React.createElement(Board, {
-			marks: this.marks()
+			game: this
 		}), document.getElementsByClassName('board-wrap')[0]);
 	}
 
-	marks() {
-		return [
-			'move0',
-			'move1',
-			'move2',
-			'move3',
-			'move4',
-			'move5',
-			'move6',
-			'move7',
-			'move8'
-		];
+	waitForPlayer(currentPlayer, otherPlayer) {
+		if (this.isOver()) {
+			console.log('game over', this.spaces.winner(), 'wins');
+		} else {
+			this.pick(currentPlayer, currentPlayer.move(this.spaces));
+			this.render();
+			this.waitForPlayer(otherPlayer, currentPlayer);
+		}
 	}
 }
