@@ -6,6 +6,6 @@ export default class Random extends Base {
 	static label() { return 'Random'; }
 
 	move(spaces) {
-		return _.sample(spaces.remaining().indexes());
+		return Promise.resolve(_.sample(spaces.remaining().indexes()));
 	}
 }

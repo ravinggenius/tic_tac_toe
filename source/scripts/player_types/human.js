@@ -5,6 +5,6 @@ export default class Human extends Base {
 
 	move(spaces) {
 		var choices = spaces.remaining().indexes();
-		return parseInt(prompt('Pick a number: ' + choices), 10);
+		return Promise.resolve(parseInt(prompt('Pick a number: ' + choices), 10));
 	}
 }

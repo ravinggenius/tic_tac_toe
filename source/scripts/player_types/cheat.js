@@ -13,7 +13,7 @@ export default class Cheat extends Base {
 
 		spaces.at(nextIndex).value = null;
 
-		return nextIndex;
+		return Promise.resolve(nextIndex);
 	}
 
 	strategies() {

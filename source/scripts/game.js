@@ -46,11 +46,13 @@ export default class Game {
 		if (this.isOver()) {
 			console.log('game over', this.spaces.winner(), 'wins');
 		} else {
-			this.pick(currentPlayer, currentPlayer.move(this.spaces));
-			this.render();
-			setTimeout(function () {
+			currentPlayer.move(this.spaces).then(function (selection) {
+				this.pick(currentPlayer, selection);
+			}.bind(this)).then(function () {
+				this.render();
+			}.bind(this)).then(function () {
 				this.waitForPlayer(otherPlayer, currentPlayer);
-			}.bind(this), 0);
+			}.bind(this));
 		}
 	}
 }
