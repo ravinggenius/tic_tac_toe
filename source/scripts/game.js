@@ -46,6 +46,8 @@ export default class Game {
 		if (this.isOver()) {
 			console.log('game over', this.spaces.winner(), 'wins');
 		} else {
+			this._currentPlayer = currentPlayer;
+
 			currentPlayer.move(this.spaces).then(function (selection) {
 				this.pick(currentPlayer, selection);
 			}.bind(this)).then(function () {
