@@ -4,6 +4,6 @@ export default class Naive extends Base {
 	static label() { return 'Naive'; }
 
 	move(spaces) {
-		return spaces.remaining().at(0).index;
+		return Promise.resolve(spaces.remaining().at(0).index);
 	}
 }

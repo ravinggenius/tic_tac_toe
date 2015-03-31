@@ -3,6 +3,9 @@ export default class Base {
 		this.mark = mark;
 	}
 
+	select(space) {
+	}
+
 	static code() {
 		return this.label().toLowerCase();
 	}

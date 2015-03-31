@@ -36,6 +36,12 @@ export default class Game {
 		}
 	}
 
+	select(space) {
+		if (!this.isOver()) {
+			this._currentPlayer.select(space);
+		}
+	}
+
 	render() {
 		React.render(React.createElement(Board, {
 			game: this
@@ -46,11 +52,15 @@ export default class Game {
 		if (this.isOver()) {
 			console.log('game over', this.spaces.winner(), 'wins');
 		} else {
-			this.pick(currentPlayer, currentPlayer.move(this.spaces));
-			this.render();
-			setTimeout(function () {
+			this._currentPlayer = currentPlayer;
+
+			currentPlayer.move(this.spaces).then(function (selection) {
+				this.pick(currentPlayer, selection);
+			}.bind(this)).then(function () {
+				this.render();
+			}.bind(this)).then(function () {
 				this.waitForPlayer(otherPlayer, currentPlayer);
-			}.bind(this), 0);
+			}.bind(this));
 		}
 	}
 }
