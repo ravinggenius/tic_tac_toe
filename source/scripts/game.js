@@ -36,6 +36,12 @@ export default class Game {
 		}
 	}
 
+	select(space) {
+		if (!this.isOver()) {
+			this._currentPlayer.select(space);
+		}
+	}
+
 	render() {
 		React.render(React.createElement(Board, {
 			game: this
