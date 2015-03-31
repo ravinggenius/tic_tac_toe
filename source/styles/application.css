@@ -1,0 +1,32 @@
+body {
+	background-color: #3B3F45;
+	color: #FC6399;
+	font-family: sans-serif;
+}
+
+.board {
+	background-color: #FC6399;
+	display: flex;
+	height: 340px;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	list-style: none;
+	padding: 0;
+	width: 340px;
+}
+
+.space {
+	background-color: #3B3F45;
+	display: inline-block;
+	font-size: 100px;
+	line-height: 1.2;
+	margin: auto;
+	padding: 0;
+	text-align: center;
+	height: 100px;
+	width: 100px;
+}
+.space:hover {
+	background-color: #525860; /* same hsl as main background-color, but L = 35 */
+	cursor: pointer;
+}
