@@ -26,16 +26,6 @@ export default class Game {
 			!this.spaces.at(selection).value;
 	}
 
-	pick(player, selection) {
-		console.log('pick', player, selection);
-
-		if (this.legalMove(selection)) {
-			this.spaces.at(selection).value = player.mark;
-		} else {
-			throw new Error('Illegal move');
-		}
-	}
-
 	select(space) {
 		if (!this.isOver()) {
 			this._currentPlayer.select(space);
@@ -55,7 +45,13 @@ export default class Game {
 			this._currentPlayer = currentPlayer;
 
 			currentPlayer.move(this.spaces).then(function (selection) {
-				this.pick(currentPlayer, selection);
+				console.log('PICK:', selection);
+
+				if (this.legalMove(selection)) {
+					this.spaces.at(selection).value = currentPlayer.mark;
+				} else {
+					throw new Error('Illegal move');
+				}
 			}.bind(this)).then(function () {
 				this.render();
 			}.bind(this)).then(function () {
