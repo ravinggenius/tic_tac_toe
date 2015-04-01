@@ -49,7 +49,7 @@ export default class Allea extends Base {
 	static findCompletionFor(mark) {
 		return function (spaces) {
 			return _.find(spaces.remaining().indexes(), function (index) {
-				return _.find(SpaceSet.winningCombinations(), function (_completion) {
+				return _.find(SpaceSet.completions(), function (_completion) {
 					var twoOfThree = _completion.reduce(function (memo, _index) {
 						return (spaces.at(_index).value === mark) ? memo.concat(_index) : memo;
 					}, []);

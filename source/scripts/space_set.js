@@ -46,8 +46,8 @@ export default class SpaceSet {
 	}
 
 	winner() {
-		var combination = _.find(SpaceSet.winningCombinations(), function (combination) {
-			var spaces = combination.map(function (index) {
+		var completion = _.find(SpaceSet.completions(), function (completion) {
+			var spaces = completion.map(function (index) {
 				return this.at(index);
 			}.bind(this));
 
@@ -56,12 +56,12 @@ export default class SpaceSet {
 				(spaces[1].value === spaces[2].value);
 		}.bind(this));
 
-		if (combination) {
-			return this.at(combination[0]).value;
+		if (completion) {
+			return this.at(completion[0]).value;
 		}
 	}
 
-	static winningCombinations() {
+	static completions() {
 		return [
 			[ 0, 1, 2 ],
 			[ 3, 4, 5 ],
