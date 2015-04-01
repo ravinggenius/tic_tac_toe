@@ -2,6 +2,7 @@ import React from 'react';
 
 import SpaceSet from './space_set';
 import Board from './components/board.jsx!';
+import Results from './components/results.jsx!';
 
 export default class Game {
 	constructor(player1, player2) {
@@ -12,6 +13,7 @@ export default class Game {
 	}
 
 	start() {
+		this.renderWinner();
 		this.render();
 		this.waitForPlayer(this.player1, this.player2);
 	}
@@ -38,9 +40,15 @@ export default class Game {
 		}), document.getElementsByClassName('board-wrap')[0]);
 	}
 
+	renderWinner() {
+		React.render(React.createElement(Results, {
+			game: this
+		}), document.getElementsByClassName('results-wrap')[0]);
+	}
+
 	waitForPlayer(currentPlayer, otherPlayer) {
 		if (this.isOver()) {
-			console.log('game over', this.spaces.winner(), 'wins');
+			this.renderWinner();
 		} else {
 			this._currentPlayer = currentPlayer;
 
