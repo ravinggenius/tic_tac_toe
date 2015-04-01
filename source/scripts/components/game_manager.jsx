@@ -4,6 +4,13 @@ import PlayerSelect from './player_select.jsx!';
 import NewGameButton from './new_game_button.jsx!';
 
 var GameManager = React.createClass({
+	getInitialState: function () {
+		return {
+			player1: null,
+			player2: null
+		};
+	},
+
 	setPlayer: function (playerKey, player) {
 		this.setState({
 			[playerKey]: player
