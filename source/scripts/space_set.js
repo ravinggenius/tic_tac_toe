@@ -46,7 +46,7 @@ export default class SpaceSet {
 	}
 
 	winner() {
-		var combination = _.find(this.winningCombinations(), function (combination) {
+		var combination = _.find(SpaceSet.winningCombinations(), function (combination) {
 			var spaces = combination.map(function (index) {
 				return this.at(index);
 			}.bind(this));
@@ -61,7 +61,7 @@ export default class SpaceSet {
 		}
 	}
 
-	winningCombinations() {
+	static winningCombinations() {
 		return [
 			[ 0, 1, 2 ],
 			[ 3, 4, 5 ],
