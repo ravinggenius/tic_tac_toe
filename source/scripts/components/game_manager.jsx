@@ -4,6 +4,13 @@ import PlayerSelect from './player_select.jsx!';
 import NewGameButton from './new_game_button.jsx!';
 
 var GameManager = React.createClass({
+	getInitialState: function () {
+		return {
+			player1: null,
+			player2: null
+		};
+	},
+
 	setPlayer: function (playerKey, player) {
 		this.setState({
 			[playerKey]: player
@@ -18,7 +25,7 @@ var GameManager = React.createClass({
 	},
 
 	render: function () {
-		return <fieldset>
+		return <fieldset className="setup">
 			<legend>Choose Players</legend>
 
 			<PlayerSelect id="player1" label="Player One" mark="X" onChange={this.setPlayer.bind(this, 'player1')} />

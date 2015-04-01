@@ -4,6 +4,16 @@ body {
 	font-family: sans-serif;
 }
 
+
+.setup {
+	border-style: none;
+}
+
+.field label {
+	margin-right: 1ch;
+}
+
+
 .board {
 	background-color: #FC6399;
 	display: flex;

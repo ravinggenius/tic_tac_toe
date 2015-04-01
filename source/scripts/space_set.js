@@ -33,12 +33,6 @@ export default class SpaceSet {
 		});
 	}
 
-	lineAt(combination) {
-		return this.filter(function (space) {
-			return combination.indexOf(space.index) >= 0;
-		});
-	}
-
 	remaining() {
 		return new SpaceSet(this.filter(function (space) {
 			return space.value === null;
