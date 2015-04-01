@@ -25,7 +25,7 @@ var GameManager = React.createClass({
 	},
 
 	render: function () {
-		return <fieldset>
+		return <fieldset className="setup">
 			<legend>Choose Players</legend>
 
 			<PlayerSelect id="player1" label="Player One" mark="X" onChange={this.setPlayer.bind(this, 'player1')} />
