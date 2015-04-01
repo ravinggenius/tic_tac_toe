@@ -44,6 +44,9 @@ export default class Game {
 		} else {
 			this._currentPlayer = currentPlayer;
 
+			console.log('============================');
+			console.log('CURRENT PLAYER:', currentPlayer);
+
 			currentPlayer.move(this.spaces).then(function (selection) {
 				console.log('PICK:', selection);
 
