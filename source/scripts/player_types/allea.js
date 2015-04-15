@@ -19,22 +19,40 @@ export default class Allea extends Base {
 	}
 
 	static strategyFor(mark) {
-		return [
-			Allea.announce('winning move'),
-			Allea.findCompletionFor(mark),
+		return {
+			X: [
+				Allea.announce('winning move'),
+				Allea.findCompletionFor(mark),
 
-			Allea.announce('blocking move'),
-			Allea.findCompletionFor(Allea.invertMark(mark)),
+				Allea.announce('blocking move'),
+				Allea.findCompletionFor(Allea.invertMark(mark)),
 
-			Allea.announce('diagonal corner'),
-			Allea.diagonalCorner(mark),
+				Allea.announce('diagonal corner'),
+				Allea.diagonalCorner(mark),
 
-			Allea.announce('any corner'),
-			Allea.anyCorner,
+				Allea.announce('any corner'),
+				Allea.anyCorner,
 
-			Allea.announce('any space'),
-			Allea.anySpace
-		];
+				Allea.announce('any space'),
+				Allea.anySpace
+			],
+			O: [
+				Allea.announce('winning move'),
+				Allea.findCompletionFor(mark),
+
+				Allea.announce('blocking move'),
+				Allea.findCompletionFor(Allea.invertMark(mark)),
+
+				Allea.announce('center'),
+				Allea.center,
+
+				Allea.announce('sides'),
+				Allea.anySide,
+
+				Allea.announce('any space'),
+				Allea.anySpace
+			]
+		}[mark];
 	}
 
 	static invertMark(mark) {
@@ -95,6 +113,26 @@ export default class Allea extends Base {
 				return space.value ? undefined : space.index;
 			}
 		}, undefined);
+	}
+
+	static anySide(spaces) {
+		return [
+			1,
+			3, 5,
+			7
+		].reduce(function (found, index) {
+			if (typeof found === 'number') {
+				return found;
+			} else {
+				var space = spaces.at(index);
+				return space.value ? undefined : space.index;
+			}
+		}, undefined);
+	}
+
+	static center(spaces) {
+		var space = spaces.at(4);
+		return space.value ? undefined : space.index;
 	}
 
 	static anySpace(spaces) {
