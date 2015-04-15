@@ -8,22 +8,7 @@ export default class Allea extends Base {
 
 	move(spaces) {
 		var calculateNextMove = function (resolve, reject) {
-			var index = [
-				Allea.announce('winning move'),
-				Allea.findCompletionFor(this.mark),
-
-				Allea.announce('blocking move'),
-				Allea.findCompletionFor(Allea.invertMark(this.mark)),
-
-				Allea.announce('diagonal corner'),
-				Allea.diagonalCorner(this.mark),
-
-				Allea.announce('any corner'),
-				Allea.anyCorner,
-
-				Allea.announce('any space'),
-				Allea.anySpace
-			].reduce(function (found, choose) {
+			var index = Allea.strategyFor(this.mark).reduce(function (found, choose) {
 				return (typeof found === 'number') ? found : choose(spaces);
 			}, undefined);
 
@@ -31,6 +16,25 @@ export default class Allea extends Base {
 		}.bind(this);
 
 		return new Promise(calculateNextMove);
+	}
+
+	static strategyFor(mark) {
+		return [
+			Allea.announce('winning move'),
+			Allea.findCompletionFor(mark),
+
+			Allea.announce('blocking move'),
+			Allea.findCompletionFor(Allea.invertMark(mark)),
+
+			Allea.announce('diagonal corner'),
+			Allea.diagonalCorner(mark),
+
+			Allea.announce('any corner'),
+			Allea.anyCorner,
+
+			Allea.announce('any space'),
+			Allea.anySpace
+		];
 	}
 
 	static invertMark(mark) {
